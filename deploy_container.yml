@@ -1,0 +1,16 @@
+- name: Deploy Nginx container
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Pull Nginx Image
+      docker_image:
+        name: nginx
+        source: pull
+
+    - name: Run Nginx Container
+      docker_container:
+        name: nginx_server
+        image: nginx
+        state: started
+        ports:
+          - "80:80"
